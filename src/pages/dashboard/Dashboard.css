@@ -1,0 +1,379 @@
+/* Dashboard.css */
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  background: #f9fafb;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 256px;
+  background: #1e1b4b;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-header h6{
+  font-size: 10px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+}
+
+.school-name {
+  font-weight: 600;
+  
+}
+
+.nav-container {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: #a5b4fc;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.nav-item:hover {
+  background: #312e81;
+}
+
+.nav-item.active {
+  background: #3730a3;
+  color: white;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #3730a3;
+}
+
+.badges-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-features {
+  background: #3730a3;
+  color: white;
+}
+
+.badge-new {
+  background: #9333ea;
+  color: white;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  overflow: auto;
+}
+
+.header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 20px;
+  color: #1f2937;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bell-btn {
+  position: relative;
+  padding: 8px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.bell-btn:hover {
+  background: #f3f4f6;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: #b93018;
+  border-radius: 50%;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #1e1b4b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Content Area */
+.content {
+  padding: 32px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon.students {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.stat-icon.teachers {
+  background: #ccfbf1;
+  color: #0d9488;
+}
+
+.stat-icon.events {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.stat-info p {
+  margin: 0;
+}
+
+.stat-info p:first-child {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.stat-info p:last-child {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* Chart Cards */
+.chart-card {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 24px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-dot.yellow {
+  background: #facc15;
+}
+
+.legend-dot.orange {
+  background: #fb923c;
+}
+
+.legend-label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.legend-value {
+  font-weight: 600;
+}
+
+/* Bottom Grid */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Calendar */
+.calendar-container {
+  margin-top: 16px;
+}
+
+.calendar-header {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  padding-bottom: 8px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 14px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calendar-day:hover {
+  background: #f3f4f6;
+}
+
+.calendar-day.highlighted-purple {
+  background: #9333ea;
+  color: white;
+  font-weight: 600;
+}
+
+.calendar-day.highlighted-yellow {
+  background: #facc15;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.calendar-day.highlighted-pink {
+  background: #fce7f3;
+  color: #ec4899;
+  font-weight: 600;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,195 @@
+/* DetailsPage.css - Common styles for TeacherDetails and StudentDetails */
+
+.detail-container {
+	padding: 1.5rem;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.detail-error-container {
+	padding: 1.5rem;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.detail-back-link {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #2563eb;
+	font-weight: 500;
+	margin-bottom: 2rem;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.detail-back-link:hover {
+	color: #1d4ed8;
+}
+
+.detail-card {
+	background-color: white;
+	border: 1px solid #e5e7eb;
+	border-radius: 1rem;
+	padding: 2rem;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.detail-header {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.detail-avatar {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.detail-avatar.teacher {
+	background-color: #dbeafe;
+	color: #2563eb;
+}
+
+.detail-avatar.student {
+	background-color: #dcfce7;
+	color: #16a34a;
+}
+
+.detail-name {
+	font-size: 2.25rem;
+	font-weight: 700;
+	color: #1f2937;
+	margin: 0;
+}
+
+.detail-role {
+	font-size: 1rem;
+	color: #6b7280;
+	margin: 0;
+}
+
+/* Sections */
+.detail-section {
+	margin-bottom: 2rem;
+}
+
+.detail-section > .section-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #1f2937;
+	margin-bottom: 1.25rem;
+	border-bottom: 2px solid #f3f4f6;
+	padding-bottom: 0.5rem;
+}
+
+.detail-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.5rem;
+}
+
+.detail-item {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.75rem;
+	background-color: #f9fafb;
+	border-radius: 0.5rem;
+}
+
+.detail-item .detail-icon {
+	color: #2563eb;
+	flex-shrink: 0;
+}
+
+.detail-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.detail-label {
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: #6b7280;
+	text-transform: uppercase;
+}
+
+.detail-value {
+	font-size: 1rem;
+	color: #1f2937;
+	font-weight: 500;
+}
+
+/* Classes Grid for Teacher Details */
+.classes-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+}
+
+.class-chip-detail {
+	background-color: #eff6ff;
+	border: 1px solid #dbeafe;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.class-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.class-name-detail {
+	font-weight: 600;
+	color: #1f2937;
+	font-size: 1rem;
+}
+
+.class-grade-detail {
+	color: #6b7280;
+	font-size: 0.875rem;
+}
+
+.class-students-detail {
+	background-color: #fff;
+	color: #2563eb;
+	padding: 0.3rem 0.6rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+/* Loading state */
+.detail-loading {
+	min-height: 50vh;
+}
+
+@media (max-width: 768px) {
+	.detail-container,
+	.detail-error-container {
+		padding: 1rem;
+	}
+	.detail-header {
+		flex-direction: column;
+		text-align: center;
+	}
+	.detail-name {
+		font-size: 1.75rem;
+	}
+	.detail-grid,
+	.classes-grid {
+		grid-template-columns: 1fr;
+	}
+}
