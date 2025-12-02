@@ -45,7 +45,6 @@ export interface CreateClassDto {
 	name: string;
 	gradeLevel: string;
 	roomAssignmentId?: string;
-	schoolId: string;
 }
 
 export interface UpdateClassDto {
