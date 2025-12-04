@@ -8,6 +8,7 @@ import {
 	CalendarIcon,
 	DollarSign,
 	BookIcon,
+	LayoutDashboard,
 } from 'lucide-react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +16,7 @@ import type { RootState } from '@/store/store';
 import { logout } from '@/slices/authSlice';
 import { useGetSchoolAnalyticsQuery } from '@/services/authApi';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import './Dashboard.css';
+import './Dashboard.css'; // This file needs to be present for the build to pass
 
 export default function DashboardLayout() {
 	const location = useLocation();
@@ -64,14 +65,23 @@ export default function DashboardLayout() {
 		);
 	}
 
+	// Logic to fix the background image style using url()
+	const logoStyle = analytics?.schoolLogo
+		? { backgroundImage: `url('${analytics.schoolLogo}')` }
+		: {};
+
 	return (
 		<div className='dashboard-container'>
 			<div className='sidebar'>
 				<div className='sidebar-header'>
-					<div
-						style={{ backgroundImage: `${analytics?.schoolLogo}` }}
-						className='logo'
-					/>
+					{analytics?.schoolLogo ? (
+						<div style={logoStyle} className='logo' />
+					) : (
+						// Fallback icon if logo URL is missing
+						<div className='logo logo-fallback'>
+							<LayoutDashboard size={28} className='text-indigo-400' />
+						</div>
+					)}
 					<span className='school-name'>
 						{analytics?.schoolName || 'Eduexcel'}
 					</span>
