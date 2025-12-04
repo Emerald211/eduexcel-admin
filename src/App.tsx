@@ -14,6 +14,7 @@ import TeacherDetails from './pages/teacher-student/TeacherDetails';
 import StudentDetails from './pages/teacher-student/StudentDetails';
 import Subjects from './pages/subjects/Subjects';
 import SubjectDetails from './pages/subjects/SubjectDetails';
+import EventsPage from './pages/events/EventPage';
 
 const theme = extendTheme({});
 
@@ -46,10 +47,7 @@ function App() {
 
 							<Route path='subjects' element={<Subjects />} />
 							<Route path='subjects/:subjectId' element={<SubjectDetails />} />
-							<Route
-								path='events'
-								element={<div>Events Page Coming Soon</div>}
-							/>
+							<Route path='events' element={<EventsPage />} />
 							<Route
 								path='finance'
 								element={<div>Finance Page Coming Soon</div>}

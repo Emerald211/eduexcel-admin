@@ -86,7 +86,7 @@ const LoginPage = () => {
 							textAlign='center'
 							mb={8}
 							color='black'>
-							Welcome, Log into you account
+							Welcome to Edutage, Log into you account
 						</Heading>
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<FormControl id='email' isInvalid={!!errors.email} mb={4}>

@@ -69,7 +69,7 @@ export default function StudentDetails() {
 					<div className='detail-info'>
 						<h1 className='detail-name'>{student.name}</h1>
 						<p className='detail-role'>
-							Student - Grade {student.currentGradeLevel}
+							Student - Grade: {student.currentGradeLevel}
 						</p>
 					</div>
 				</div>

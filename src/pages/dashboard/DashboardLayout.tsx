@@ -15,7 +15,7 @@ import type { RootState } from '@/store/store';
 import { logout } from '@/slices/authSlice';
 import { useGetSchoolAnalyticsQuery } from '@/services/authApi';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import './Dashboard.css'
+import './Dashboard.css';
 
 export default function DashboardLayout() {
 	const location = useLocation();
@@ -66,15 +66,19 @@ export default function DashboardLayout() {
 
 	return (
 		<div className='dashboard-container'>
-			{/* Sidebar */}
 			<div className='sidebar'>
 				<div className='sidebar-header'>
-					<div className='logo' />
+					<div
+						style={{ backgroundImage: `${analytics?.schoolLogo}` }}
+						className='logo'
+					/>
 					<span className='school-name'>
 						{analytics?.schoolName || 'Eduexcel'}
 					</span>
 					{analytics?.schoolId && (
-						<h6 className='text-xs text-gray-500 mt-1'>{analytics.schoolId}</h6>
+						<h6 className='text-xs text-gray-500 mt-1'>
+							ID: {analytics.schoolId}
+						</h6>
 					)}
 				</div>
 

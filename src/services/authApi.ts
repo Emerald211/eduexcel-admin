@@ -81,6 +81,7 @@ export interface UpdateRoomDto {
 export interface SchoolAnalyticsResponseDto {
 	schoolId: string;
 	schoolName: string;
+	schoolLogo: string;
 	administrativeSummary: {
 		totalClasses: number;
 		totalStudents: number;
@@ -213,6 +214,39 @@ export interface CreateSubjectResponse {
 	subject: CreatedSubjectResult;
 }
 
+export type EventCategory =
+	| 'Holiday'
+	| 'Meeting'
+	| 'Academic'
+	| 'Sports'
+	| 'Other';
+
+export interface EventInterface {
+	id: string;
+	title: string;
+	description: string;
+	startDate: string; // ISO string
+	endDate: string; // ISO string
+	isAllDay: boolean;
+	category: EventCategory;
+	createdAt: string;
+	createdBy: string;
+}
+
+export interface CreateEventDto {
+	title: string;
+	description: string;
+	startDate: string; // ISO string
+	endDate: string; // ISO string
+	isAllDay?: boolean;
+	category: EventCategory;
+}
+
+export interface GetEventsQueryArgs {
+	month?: number;
+	year?: number;
+}
+
 // API Definition
 export const api = createApi({
 	reducerPath: 'api',
@@ -234,6 +268,7 @@ export const api = createApi({
 		'Teachers',
 		'Students',
 		'Subjects',
+		'Events',
 	],
 	endpoints: (builder) => ({
 		// Auth endpoints
@@ -345,7 +380,7 @@ export const api = createApi({
 				method: 'POST',
 				body: data,
 			}),
-			invalidatesTags: ['Subjects'], // Essential to refresh the subject list after creation
+			invalidatesTags: ['Subjects'],
 		}),
 
 		assignTeacherToSubject: builder.mutation<
@@ -358,6 +393,25 @@ export const api = createApi({
 				body: data,
 			}),
 			invalidatesTags: ['Subjects', 'Classes'],
+		}),
+
+		getSchoolEvents: builder.query<EventInterface[], GetEventsQueryArgs>({
+			query: (args) => {
+				const params = new URLSearchParams();
+				if (args.month) params.append('month', args.month.toString());
+				if (args.year) params.append('year', args.year.toString());
+				return `events?${params.toString()}`;
+			},
+			providesTags: ['Events'],
+		}),
+
+		createEvent: builder.mutation<EventInterface, CreateEventDto>({
+			query: (data) => ({
+				url: 'events',
+				method: 'POST',
+				body: data,
+			}),
+			invalidatesTags: ['Events'],
 		}),
 	}),
 });
@@ -379,4 +433,6 @@ export const {
 	useGetSubjectsQuery,
 	useCreateSubjectMutation,
 	useAssignTeacherToSubjectMutation,
+	useGetSchoolEventsQuery,
+    useCreateEventMutation, 
 } = api;

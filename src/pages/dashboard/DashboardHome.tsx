@@ -129,6 +129,9 @@ export default function DashboardHome() {
 		skip: !user?.schoolId,
 	});
 
+	console.log(analytics);
+	
+
 	return (
 		<main className='content'>
 			{/* Stats Grid */}
@@ -155,7 +158,7 @@ export default function DashboardHome() {
 								</div>
 								<div className='stat-info'>
 									<p>Students</p>
-									<p>{analytics?.administrativeSummary.totalStudents || 0}</p>
+									<p>{analytics?.administrativeSummary.totalStudents}</p>
 								</div>
 							</div>
 						</div>

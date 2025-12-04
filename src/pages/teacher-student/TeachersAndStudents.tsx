@@ -197,7 +197,7 @@ export default function TeachersAndStudents() {
 							{filteredStudents.map((student) => (
 								<Link
 									key={student.userId}
-									to={`/student/${student.userId}`}
+									to={`student/${student.userId}`}
 									className='person-card clickable-card'
 									style={{ textDecoration: 'none', color: 'inherit' }}>
 									<div>

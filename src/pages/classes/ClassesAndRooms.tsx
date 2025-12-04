@@ -229,6 +229,17 @@ export default function ClassesAndRooms() {
             </div>
             <form onSubmit={handleCreateClass}>
               <div className='form-container'>
+                 <div className='form-group'>
+                  <label className='form-label'>Grade Level</label>
+                  <input
+                    type='text'
+                    value={classForm.gradeLevel}
+                    onChange={(e) => setClassForm({ ...classForm, gradeLevel: e.target.value })}
+                    className='form-input'
+                    placeholder='e.g., Grade 1, JSS 1, SSS 2'
+                    required
+                  />
+                </div>
                 <div className='form-group'>
                   <label className='form-label'>Class Name</label>
                   <input
@@ -240,17 +251,7 @@ export default function ClassesAndRooms() {
                     required
                   />
                 </div>
-                <div className='form-group'>
-                  <label className='form-label'>Grade Level</label>
-                  <input
-                    type='text'
-                    value={classForm.gradeLevel}
-                    onChange={(e) => setClassForm({ ...classForm, gradeLevel: e.target.value })}
-                    className='form-input'
-                    placeholder='e.g., Grade 1, JSS 1, SSS 2'
-                    required
-                  />
-                </div>
+               
                 <div className='form-group'>
                   <label className='form-label'>Room Assignment (Optional)</label>
                   <select

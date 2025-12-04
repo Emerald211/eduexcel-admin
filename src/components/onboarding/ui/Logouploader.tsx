@@ -8,7 +8,6 @@ import {
 	Text,
 	Spinner,
 	Image,
-	Link,
 	useToast,
 	Flex,
 } from '@chakra-ui/react';
@@ -129,9 +128,6 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({ name }) => {
 								objectFit='contain'
 								mb={2}
 							/>
-							<Link href={preview} isExternal fontSize='xs' color='blue.500'>
-								View Hosted Link
-							</Link>
 						</Box>
 					)}
 				</Box>
