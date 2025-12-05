@@ -10,11 +10,9 @@ export default function TeacherDetails() {
 	const navigate = useNavigate();
 	const { user } = useSelector((state: RootState) => state.auth);
 
-	// Fetch the list of all teachers
 	const { data: teachers = [], isLoading: loadingTeachers } =
-		useGetTeachersQuery(user?.schoolId || '', { skip: !user?.schoolId });
+		useGetTeachersQuery(undefined, { skip: !user?.schoolId });
 
-	// Find the specific teacher from the list
 	const teacher = teachers.find((t) => t.userId === userId);
 
 	if (loadingTeachers) {

@@ -20,8 +20,9 @@ export default function StudentDetails() {
 	const { user } = useSelector((state: RootState) => state.auth);
 
 	// Fetch the list of all students
+	// FIX: Use undefined as the argument, relying on skip
 	const { data: students = [], isLoading: loadingStudents } =
-		useGetStudentsQuery(user?.schoolId || '', { skip: !user?.schoolId });
+		useGetStudentsQuery(undefined, { skip: !user?.schoolId });
 
 	// Find the specific student from the list
 	const student = students.find((s) => s.userId === userId);

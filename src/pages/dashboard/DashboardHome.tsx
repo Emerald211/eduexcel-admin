@@ -12,7 +12,13 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from 'recharts';
-import { Users, GraduationCap, AlertCircle, UserCheck } from 'lucide-react';
+import {
+	Users,
+	GraduationCap,
+	AlertCircle,
+	UserCheck,
+	Loader2,
+} from 'lucide-react';
 import './Dashboard.css';
 
 const performanceData = [
@@ -41,8 +47,9 @@ const financeData = [
 ];
 
 const Calendar = () => {
-	const daysInMonth = new Date(2025, 3, 0).getDate();
-	const firstDay = new Date(2025, 2, 1).getDay();
+	// Note: Use the current year/month dynamically for a real app
+	const daysInMonth = new Date(2025, 3, 0).getDate(); // Gets last day of March (month index 3 is April)
+	const firstDay = new Date(2025, 2, 1).getDay(); // Gets the day index (0=Sun, 6=Sat) of March 1st
 
 	const days = [];
 	for (let i = 0; i < firstDay; i++) {
@@ -65,11 +72,11 @@ const Calendar = () => {
 					if (!day)
 						return <div key={`empty-${idx}`} className='calendar-day empty' />;
 					const highlightClass =
-						day === 8
+						day === 8 // Example highlight: International Women's Day
 							? 'highlighted-purple'
-							: day === 20
+							: day === 20 // Example highlight: Spring Equinox
 							? 'highlighted-yellow'
-							: day === 23
+							: day === 23 // Example highlight: School Event
 							? 'highlighted-pink'
 							: '';
 
@@ -85,12 +92,13 @@ const Calendar = () => {
 };
 
 const StatCardSkeleton = () => (
+	// Tailwind classes for skeleton loading effect
 	<div className='card'>
 		<div className='stat-card animate-pulse'>
-			<div className='stat-icon bg-gray-200' />
+			<div className='stat-icon bg-gray-200 rounded-full w-12 h-12' />
 			<div className='stat-info'>
 				<div className='h-4 bg-gray-200 rounded w-20 mb-2' />
-				<div className='h-6 bg-gray-200 rounded w-12' />
+				<div className='h-6 bg-gray-300 rounded w-12' />
 			</div>
 		</div>
 	</div>
@@ -106,10 +114,11 @@ const ErrorMessage = ({
 	<div className='card col-span-full'>
 		<div className='p-6 flex flex-col items-center justify-center gap-4'>
 			<AlertCircle className='text-red-500' size={48} />
-			<p className='text-red-600 text-center'>{message}</p>
+			<p className='text-red-600 text-center'>Error loading data: {message}</p>
 			<button
 				onClick={onRetry}
-				className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+				className='px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow-md hover:bg-blue-600 transition-colors'>
+				<Loader2 size={16} className='inline mr-2 animate-spin' />
 				Retry
 			</button>
 		</div>
@@ -125,12 +134,22 @@ export default function DashboardHome() {
 		isError,
 		error,
 		refetch,
-	} = useGetSchoolAnalyticsQuery(user?.schoolId || '', {
+	} = useGetSchoolAnalyticsQuery(undefined, {
+		// FIX: Pass undefined as argument
 		skip: !user?.schoolId,
 	});
 
-	console.log(analytics);
-	
+	// If we are skipping the query because schoolId is missing, show a temporary message
+	if (!user?.schoolId && !isError) {
+		return (
+			<main className='content'>
+				<div className='card col-span-full p-6 text-center'>
+					<Loader2 className='spinner mx-auto mb-4' size={32} />
+					<p className='text-gray-500'>Waiting for school information...</p>
+				</div>
+			</main>
+		);
+	}
 
 	return (
 		<main className='content'>
@@ -145,7 +164,9 @@ export default function DashboardHome() {
 				) : isError ? (
 					<ErrorMessage
 						message={
-							'error' in error ? error.error : 'Failed to load analytics data'
+							'error' in error
+								? error.error.toString()
+								: 'Failed to load analytics data'
 						}
 						onRetry={refetch}
 					/>
@@ -158,7 +179,10 @@ export default function DashboardHome() {
 								</div>
 								<div className='stat-info'>
 									<p>Students</p>
-									<p>{analytics?.administrativeSummary.totalStudents}</p>
+									{/* Use optional chaining for safety */}
+									<p className='text-2xl font-bold'>
+										{analytics?.administrativeSummary.totalStudents ?? 'N/A'}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -170,7 +194,9 @@ export default function DashboardHome() {
 								</div>
 								<div className='stat-info'>
 									<p>Teachers</p>
-									<p>{analytics?.administrativeSummary.totalTeachers || 0}</p>
+									<p className='text-2xl font-bold'>
+										{analytics?.administrativeSummary.totalTeachers ?? 'N/A'}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -182,7 +208,9 @@ export default function DashboardHome() {
 								</div>
 								<div className='stat-info'>
 									<p>Parents</p>
-									<p>{analytics?.administrativeSummary.totalParents || 0}</p>
+									<p className='text-2xl font-bold'>
+										{analytics?.administrativeSummary.totalParents ?? 'N/A'}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -198,13 +226,13 @@ export default function DashboardHome() {
 						<div className='chart-legend'>
 							<div className='legend-item'>
 								<div className='legend-dot yellow' />
-								<span className='legend-label'>This Week</span>
-								<span className='legend-value'>1,245</span>
+								<span className='legend-label'>This Year</span>
+								<span className='legend-value'>2025</span>
 							</div>
 							<div className='legend-item'>
 								<div className='legend-dot orange' />
-								<span className='legend-label'>Last Week</span>
-								<span className='legend-value'>1,356</span>
+								<span className='legend-label'>Last Year</span>
+								<span className='legend-value'>2024</span>
 							</div>
 						</div>
 					</div>
@@ -217,6 +245,7 @@ export default function DashboardHome() {
 							<Line
 								type='monotone'
 								dataKey='thisWeek'
+								name='Current Performance'
 								stroke='#facc15'
 								strokeWidth={3}
 								dot={{ fill: '#facc15', r: 4 }}
@@ -224,6 +253,7 @@ export default function DashboardHome() {
 							<Line
 								type='monotone'
 								dataKey='lastWeek'
+								name='Previous Performance'
 								stroke='#fb923c'
 								strokeWidth={3}
 								dot={{ fill: '#fb923c', r: 4 }}
@@ -245,17 +275,18 @@ export default function DashboardHome() {
 				<div className='card'>
 					<div className='chart-card'>
 						<div className='chart-header'>
-							<h2 className='chart-title'>School Finance</h2>
+							<h2 className='chart-title'>Weekly Income Trend</h2>
 							<div className='chart-legend'>
 								<div className='legend-item'>
 									<div className='legend-dot yellow' />
 									<span className='legend-label'>This Week</span>
-									<span className='legend-value'>1,245</span>
+									{/* Adjusted legend values to fit the chart's arbitrary data */}
+									<span className='legend-value text-green-600'>$1,245</span>
 								</div>
 								<div className='legend-item'>
 									<div className='legend-dot orange' />
 									<span className='legend-label'>Last Week</span>
-									<span className='legend-value'>1,356</span>
+									<span className='legend-value text-red-600'>$1,356</span>
 								</div>
 							</div>
 						</div>
@@ -265,8 +296,18 @@ export default function DashboardHome() {
 								<XAxis dataKey='day' />
 								<YAxis />
 								<Tooltip />
-								<Bar dataKey='thisWeek' fill='#facc15' radius={[8, 8, 0, 0]} />
-								<Bar dataKey='lastWeek' fill='#fb923c' radius={[8, 8, 0, 0]} />
+								<Bar
+									dataKey='thisWeek'
+									name='This Week'
+									fill='#facc15'
+									radius={[8, 8, 0, 0]}
+								/>
+								<Bar
+									dataKey='lastWeek'
+									name='Last Week'
+									fill='#fb923c'
+									radius={[8, 8, 0, 0]}
+								/>
 							</BarChart>
 						</ResponsiveContainer>
 					</div>

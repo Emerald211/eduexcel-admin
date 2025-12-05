@@ -22,10 +22,11 @@ export default function TeachersAndStudents() {
 	const [activeTab, setActiveTab] = useState<TabType>('teachers');
 	const [searchQuery, setSearchQuery] = useState('');
 
+	// FIX: Use undefined as the argument for both query hooks
 	const { data: teachers = [], isLoading: loadingTeachers } =
-		useGetTeachersQuery(user?.schoolId || '', { skip: !user?.schoolId });
+		useGetTeachersQuery(undefined, { skip: !user?.schoolId });
 	const { data: students = [], isLoading: loadingStudents } =
-		useGetStudentsQuery(user?.schoolId || '', { skip: !user?.schoolId });
+		useGetStudentsQuery(undefined, { skip: !user?.schoolId });
 
 	const filteredTeachers = Array.isArray(teachers)
 		? teachers.filter(

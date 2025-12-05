@@ -2,7 +2,6 @@ import {
 	Bell,
 	LogOut,
 	Settings,
-	BookOpen,
 	Users,
 	GraduationCap,
 	CalendarIcon,
@@ -16,7 +15,7 @@ import type { RootState } from '@/store/store';
 import { logout } from '@/slices/authSlice';
 import { useGetSchoolAnalyticsQuery } from '@/services/authApi';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import './Dashboard.css'; // This file needs to be present for the build to pass
+import './Dashboard.css'; // This file is assumed to be present
 
 export default function DashboardLayout() {
 	const location = useLocation();
@@ -24,7 +23,9 @@ export default function DashboardLayout() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const { data: analytics } = useGetSchoolAnalyticsQuery(user?.schoolId || '', {
+	// FIX: Pass undefined as the argument, relying on skip and the schoolId being available
+	// via a custom baseQuery or middleware in authApi.
+	const { data: analytics } = useGetSchoolAnalyticsQuery(undefined, {
 		skip: !user?.schoolId,
 	});
 
@@ -34,7 +35,7 @@ export default function DashboardLayout() {
 	};
 
 	const navItems = [
-		{ name: 'Dashboard', icon: BookOpen, path: '/dashboard' },
+		{ name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' }, // Changed to LayoutDashboard icon for main dashboard
 		{ name: 'Teachers/Students', icon: Users, path: '/dashboard/teachers' },
 		{ name: 'Classes/Rooms', icon: GraduationCap, path: '/dashboard/classes' },
 		{ name: 'Subjects', icon: BookIcon, path: '/dashboard/subjects' },
