@@ -45,6 +45,9 @@ export default function ClassesAndRooms() {
     user?.schoolId || '',
     { skip: !user?.schoolId }
   );
+
+  console.log(classes);
+  
   const { data: rooms = [], isLoading: loadingRooms } = useGetRoomsQuery(
     user?.schoolId || '',
     { skip: !user?.schoolId }
